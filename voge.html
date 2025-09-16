@@ -197,7 +197,151 @@
         </div>
       </div>
     </section>
+<section id="giftIntro">
+  <h1>選擇困難症—送禮服務</h1>
+  <p class="lead">不知道該送Ta什麼？
+    <p class="lead">點擊下方箭頭，根據您對Ta的描述，Sui會為挑選出最佳禮物🎁！</p>
+  <button id="showGiftForm" class="btn btn-primary" style="font-size:24px; padding:12px 20px;">↓</button>
+</section>
 
+<section id="giftFormSection" style="display:none; margin-top:40px;">
+  <form class="gift-form" id="giftForm" action="https://formspree.io/f/你的ID" method="POST">
+
+    <div class="gift-card">
+      <label>對Ta(收禮人)的印象／形容</label>
+      <textarea name="description" placeholder="例如：喜歡簡約、活潑、喜歡金色系..." required></textarea>
+    </div>
+
+    <div class="gift-card">
+      <label>偏好飾品類型</label>
+      <select name="type">
+        <option value="earring">耳環</option>
+        <option value="necklace">項鍊</option>
+        <option value="bracelet">手鍊</option>
+        <option value="any">隨便都可以</option>
+      </select>
+    </div>
+
+    <!-- 卡片式送禮方案選擇 -->
+<div class="gift-card">
+  <label>送禮方案</label>
+  <div class="plan-cards">
+    <div class="plan-card" data-value="小資方案 $399">
+      <h4>小資方案</h4>
+      <p>$399 <br>單樣飾品</p>
+      <div class="plan-detail">簡單又貼心的小資選擇，適合日常送禮。</div>
+    </div>
+    <div class="plan-card" data-value="高CP值方案 $699">
+      <h4>CP值最佳方案</h4>
+      <p>$699 <br>兩樣飾品+訂製卡片</p>
+      <div class="plan-detail">雙飾品加上專屬卡片，送禮更有心意。</div>
+    </div>
+    <div class="plan-card" data-value="心意亙古方案 $999">
+      <h4>心意亙古方案</h4>
+      <p>$999 <br>手環+項鍊+耳飾/戒指隨心選+訂製卡片</p>
+      <div class="plan-detail">豪華心意方案，讓送禮成為一場儀式。</div>
+    </div>
+  </div>
+  <!-- 隱藏欄位，儲存使用者選擇方案 -->
+  <input type="hidden" name="plan" id="selectedPlan" required>
+</div>
+
+<style>
+.plan-cards{ display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;}
+.plan-card{ flex:1; min-width:150px; background:var(--card); padding:16px; border-radius:16px; box-shadow:var(--shadow); cursor:pointer; transition:.2s; position:relative;}
+.plan-card:hover{ transform:translateY(-3px); box-shadow:0 10px 25px rgba(70,50,30,0.12);}
+.plan-card.selected{ border:2px solid var(--accent); }
+.plan-card h4{ margin:0 0 6px; font-family:var(--font-serif); color:var(--accent);}
+.plan-card p{ margin:0; color:var(--muted); font-size:14px;}
+.plan-detail{ display:none; margin-top:6px; font-size:13px; color:var(--muted); }
+/* 選擇後顯示細節 */
+.plan-card.selected .plan-detail{ display:block; }
+</style>
+
+<script>
+// 方案選擇
+const planCards = document.querySelectorAll('.plan-card');
+const selectedPlanInput = document.getElementById('selectedPlan');
+
+planCards.forEach(card=>{
+  card.addEventListener('click',()=>{
+    planCards.forEach(c=>c.classList.remove('selected')); // 取消其他選擇
+    card.classList.add('selected');
+    selectedPlanInput.value = card.dataset.value; // 填入隱藏欄位
+  });
+});
+</script>
+
+    <div class="gift-card">
+      <label>聯絡方式</label>
+      <input type="email" name="email" placeholder="請輸入 Email" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">送出需求</button>
+  </form>
+
+  <!-- 彈窗 -->
+  <div id="giftModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>我們已收到你的需求！🎁<br>我們會在 24 小時內回覆你。</p>
+    </div>
+  </div>
+</section>
+
+<style>
+/* giftIntro */
+#giftIntro{ text-align:center; margin:50px 0; }
+#giftIntro .lead{ color:var(--muted); font-size:15px; margin-bottom:16px; }
+
+/* gift-form & gift-card */
+.gift-card{ background: var(--card); padding:20px; border-radius:16px; box-shadow: var(--shadow); margin-bottom:16px; transition: .2s; }
+.gift-card:hover{ transform: translateY(-3px); box-shadow:0 10px 25px rgba(70,50,30,0.12);}
+.gift-card label{ display:block; margin-bottom:8px; font-weight:600; color:var(--accent);}
+.gift-card textarea, .gift-card input, .gift-card select{width:100%; padding:12px; border-radius:12px; border:1px solid var(--accent-2); font-size:14px;}
+
+/* 彈窗 */
+.modal { display:none; position: fixed; z-index:999; left:0; top:0; width:100%; height:100%; background-color: rgba(0,0,0,0.5); animation: fadeIn 0.3s;}
+.modal-content { background-color: var(--bg); margin:15% auto; padding:30px; border-radius:16px; width:90%; max-width:400px; text-align:center; box-shadow:var(--shadow); animation: slideUp 0.4s; color: var(--accent); font-weight:600; }
+.close { color:var(--accent); float:right; font-size:24px; font-weight:bold; cursor:pointer; }
+.close:hover{color:#6e4630;}
+@keyframes slideUp{ from{transform:translateY(50px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+@keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
+</style>
+
+<script>
+// 顯示表單區塊
+document.getElementById('showGiftForm').addEventListener('click', function(){
+  document.getElementById('giftFormSection').style.display = 'block';
+  this.scrollIntoView({behavior:"smooth"});
+});
+
+// 表單提交 + 彈窗
+const form = document.getElementById('giftForm');
+const modal = document.getElementById('giftModal');
+const span = modal.querySelector('.close');
+
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  const formData = new FormData(form);
+
+  fetch(form.action, {
+    method:'POST',
+    body: formData,
+    headers:{ 'Accept':'application/json' }
+  })
+  .then(response => {
+    if(response.ok){
+      form.reset();
+      modal.style.display = 'block';
+    } else { alert("Oops! 發生錯誤，請稍後再試。"); }
+  })
+  .catch(()=>{ alert("網路異常，請稍後再試。"); });
+});
+
+span.onclick = ()=>{ modal.style.display="none"; }
+window.onclick = (event)=>{ if(event.target==modal){ modal.style.display="none"; } }
+</script>
     <section id="contact">
       <h2>聯絡 / 社群</h2>
       <div class="socials">
