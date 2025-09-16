@@ -205,11 +205,8 @@
 </section>
 
 <section id="giftFormSection" style="display:none; margin-top:40px;">
-  <form class="gift-form" id="giftForm" action="https://formspree.io/f/xjkeqggp"
-  method="POST"
->
+  <form class="gift-form" id="giftForm" action="https://formspree.io/f/xjkeqggp" method="POST">
 
-</form>
     <div class="gift-card">
       <label>對Ta(收禮人)的印象／形容</label>
       <textarea name="description" placeholder="例如：喜歡簡約、活潑、喜歡金色系..." required></textarea>
@@ -226,62 +223,34 @@
     </div>
 
     <!-- 卡片式送禮方案選擇 -->
-<div class="gift-card">
-  <label>送禮方案</label>
-  <div class="plan-cards">
-    <div class="plan-card" data-value="小資方案 $399">
-      <h4>小資方案</h4>
-      <p>$399 <br>單樣飾品</p>
-      <div class="plan-detail">簡單又貼心的小資選擇，適合日常送禮。</div>
-    </div>
-    <div class="plan-card" data-value="高CP值方案 $699">
-      <h4>CP值最佳方案</h4>
-      <p>$699 <br>兩樣飾品+訂製卡片</p>
-      <div class="plan-detail">雙飾品加上專屬卡片，送禮更有心意。</div>
-    </div>
-    <div class="plan-card" data-value="心意亙古方案 $999">
-      <h4>心意亙古方案</h4>
-      <p>$999 <br>手環+項鍊+耳飾/戒指隨心選+訂製卡片</p>
-      <div class="plan-detail">豪華心意方案，讓送禮成為一場儀式。</div>
-    </div>
-  </div>
-  <!-- 隱藏欄位，儲存使用者選擇方案 -->
-  <input type="hidden" name="plan" id="selectedPlan" required>
-</div>
-
-<style>
-.plan-cards{ display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;}
-.plan-card{ flex:1; min-width:150px; background:var(--card); padding:16px; border-radius:16px; box-shadow:var(--shadow); cursor:pointer; transition:.2s; position:relative;}
-.plan-card:hover{ transform:translateY(-3px); box-shadow:0 10px 25px rgba(70,50,30,0.12);}
-.plan-card.selected{ border:2px solid var(--accent); }
-.plan-card h4{ margin:0 0 6px; font-family:var(--font-serif); color:var(--accent);}
-.plan-card p{ margin:0; color:var(--muted); font-size:14px;}
-.plan-detail{ display:none; margin-top:6px; font-size:13px; color:var(--muted); }
-/* 選擇後顯示細節 */
-.plan-card.selected .plan-detail{ display:block; }
-</style>
-
-<script>
-// 方案選擇
-const planCards = document.querySelectorAll('.plan-card');
-const selectedPlanInput = document.getElementById('selectedPlan');
-
-planCards.forEach(card=>{
-  card.addEventListener('click',()=>{
-    planCards.forEach(c=>c.classList.remove('selected')); // 取消其他選擇
-    card.classList.add('selected');
-    selectedPlanInput.value = card.dataset.value; // 填入隱藏欄位
-  });
-});
-</script>
-
     <div class="gift-card">
-      <label>聯絡方式</label>
-      <input type="email" name="email" placeholder="請輸入 Email" required>
+      <label>送禮方案</label>
+      <div class="plan-cards">
+        <div class="plan-card" data-value="小資方案 $399">
+          <h4>小資方案</h4>
+          <p>$399 <br>單樣飾品</p>
+          <div class="plan-detail">簡單又貼心的小資選擇，適合日常送禮。</div>
+        </div>
+        <div class="plan-card" data-value="高CP值方案 $699">
+          <h4>CP值最佳方案</h4>
+          <p>$699 <br>兩樣飾品+訂製卡片</p>
+          <div class="plan-detail">雙飾品加上專屬卡片，送禮更有心意。</div>
+        </div>
+        <div class="plan-card" data-value="心意亙古方案 $999">
+          <h4>心意亙古方案</h4>
+          <p>$999 <br>手環+項鍊+耳飾/戒指隨心選+訂製卡片</p>
+          <div class="plan-detail">豪華心意方案，讓送禮成為一場儀式。</div>
+        </div>
+      </div>
+      <!-- 隱藏欄位，儲存使用者選擇方案 -->
+      <input type="hidden" name="plan" id="selectedPlan" required>
     </div>
 
-    <button type="submit" class="btn btn-primary">送出需求</button>
+    <!-- ★必須有送出按鈕★ -->
+    <button type="submit" class="btn btn-primary" style="margin-top:20px;">送出需求</button>
+
   </form>
+</section>
 
   <!-- 彈窗 -->
   <div id="giftModal" class="modal">
