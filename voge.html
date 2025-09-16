@@ -205,8 +205,20 @@
 </section>
 
 <section id="giftFormSection" style="display:none; margin-top:40px;">
-  <form class="gift-form" id="giftForm" action="https://docs.google.com/spreadsheets/d/1HEklkFdNTwW9ix3FH_fIJBYYIbb75lJzisK8-KYZgVE/edit?gid=0#gid=0" method="POST">
-
+  <form class="gift-form" id="giftForm" action="https://formspree.io/f/xjkeqggp"
+  method="POST"
+>
+  <label>
+    Your email:
+    <input type="email" name="email">
+  </label>
+  <label>
+    Your message:
+    <textarea name="message"></textarea>
+  </label>
+  <!-- your other form fields go here -->
+  <button type="submit">Send</button>
+</form>
     <div class="gift-card">
       <label>對Ta(收禮人)的印象／形容</label>
       <textarea name="description" placeholder="例如：喜歡簡約、活潑、喜歡金色系..." required></textarea>
